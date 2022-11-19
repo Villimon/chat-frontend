@@ -1,0 +1,41 @@
+.dropdawn {
+    position: absolute;
+    top: 60px;
+    right: 25px;
+    background-color: #3C3AC2;
+    width: 300px;
+    border: 1px solid #201F7C;
+    border-radius: 5px;
+
+
+
+    &__list {
+        padding: 15px;
+    }
+
+    &__item {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.3s all ease 0s;
+        //Перенос с дефисом
+        // hyphens: auto;
+        //Перенос без дефиса
+        word-break: break-all;
+
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        &:hover {
+            color: rgb(214, 147, 147);
+        }
+    }
+
+    &__icon {
+        font-size: 25px;
+        margin-right: 20px;
+
+    }
+}

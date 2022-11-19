@@ -1,0 +1,154 @@
+.dialog {
+    width: 100%;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+
+    &__header {}
+
+    &__chat {
+        flex: 1 1 auto;
+        overflow: auto;
+        word-break: break-all;
+
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #ccc;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: blue;
+            border-radius: 20px;
+        }
+    }
+
+    &__input {
+        min-height: 60px;
+        background-color: #4846A7;
+        border-radius: 0 0 20px 0;
+    }
+}
+
+.header-dialog {
+    min-height: 80px;
+    background-color: #3C3AC2;
+    border-radius: 0 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    position: relative;
+
+    &__left {
+        display: flex;
+    }
+
+    &__arrow {
+        font-size: 30px;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: 0.3s all ease 0s;
+
+        &:hover {
+            color: rgb(214, 147, 147);
+        }
+    }
+
+    &__name {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+    }
+
+    &__icons {
+        display: flex;
+
+    }
+
+    &__icon {
+        font-size: 30px;
+        cursor: pointer;
+        transition: 0.3s all ease 0s;
+
+        &:not(:last-child) {
+            margin-right: 15px;
+        }
+
+        &:hover {
+            color: rgb(214, 147, 147);
+        }
+    }
+
+
+}
+
+
+.chat-dialog {
+    display: flex;
+    margin-bottom: 0px;
+    padding: 10px 15px;
+
+    &__user {
+        margin-right: 15px;
+    }
+
+    &__img {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        margin-bottom: 2px;
+    }
+
+    &__time {
+        font-size: 10px;
+        color: #ccc;
+        text-align: center;
+    }
+
+    &__message {
+        background-color: #707AD6;
+        height: 100%;
+        display: flex;
+        align-items: end;
+        padding: 10px 15px;
+        border-radius: 20px;
+
+    }
+
+
+}
+
+
+.input-dialog {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+
+    &__icon {
+        font-size: 30px;
+        transition: 0.3s all ease 0s;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+
+        &:hover {
+            color: rgb(214, 147, 147);
+        }
+    }
+
+    &__input {
+        flex: 1 1 auto;
+        background-color: transparent;
+        color: #fff;
+        font-size: 26px;
+    }
+
+    input[type="text"]::-webkit-input-placeholder {
+        color: #fff;
+    }
+}

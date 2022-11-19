@@ -1,0 +1,31 @@
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: -100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    z-index: 10;
+
+    &.active {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+
+.modalContant {
+    border-radius: 20px;
+    background-color: #29285A;
+    width: 380px;
+    transform: scale(0.5);
+    transition: 0.4s all;
+
+    &.active {
+        transform: scale(1);
+    }
+}

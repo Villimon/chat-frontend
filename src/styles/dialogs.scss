@@ -1,0 +1,74 @@
+.dialogs-sidebar {
+    max-height: 550px;
+    overflow: auto;
+
+    a {
+        color: #fff;
+    }
+
+    .active {
+        background: rgba(119, 117, 240, 0.4);
+    }
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #ccc;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: blue;
+        border-radius: 20px;
+    }
+
+    &__body {
+        padding: 0px 0px;
+    }
+
+    &__item {}
+}
+
+.item-dialogs-sidebar {
+    display: flex;
+    padding: 10px 15px;
+    transition: 0.3s all ease 0s;
+
+
+
+    &:hover {
+        background: rgba(119, 117, 240, 0.4);
+    }
+
+    &__img {
+        height: 60px;
+        min-width: 60px;
+        border-radius: 100%;
+        margin-right: 15px;
+    }
+
+    &__user {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        max-width: 265px;
+        cursor: pointer;
+
+
+    }
+
+    &__name {
+        margin-bottom: 5px;
+        font-size: 20px;
+
+
+    }
+
+    &__message {
+        color: #C2C2C2;
+        font-size: 18px;
+        white-space: nowrap;
+    }
+}
