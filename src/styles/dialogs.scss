@@ -46,7 +46,11 @@
         min-width: 60px;
         border-radius: 100%;
         margin-right: 15px;
+        flex: 0 0 60px;
+
     }
+
+
 
     &__user {
         display: flex;

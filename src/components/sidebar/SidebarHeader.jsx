@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PhotoUser from '../../assets/images/photoUser.jpg'
-import { Logouta } from '../../redux/auth-reducer';
+import { logout } from '../../redux/auth-reducer';
 import Profile from '../profile/Profile';
 import SkeletonHeader from '../skeletons/SkeletonHeader';
 
@@ -11,9 +11,12 @@ const SidebarHeader = React.memo(({ isLoading }) => {
     const [active, setActive] = useState(false)
 
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.auth.data)
 
-    const logout = () => {
-        dispatch(Logouta())
+
+    const _logout = () => {
+        dispatch(logout())
+        window.localStorage.removeItem('token')
     }
 
     return (
@@ -21,10 +24,10 @@ const SidebarHeader = React.memo(({ isLoading }) => {
             {isLoading
                 ? <SkeletonHeader />
                 : <>
-                    <img src={PhotoUser} className='header-sidebar__img' />
-                    <div className="header-sidebar__username" onClick={() => setActive(true)} >Serega Pl1m</div>
-                    <span className='header-sidebar__logout _icon-logout' onClick={logout} ></span>
-                    {active && <Profile setActive={setActive} />}
+                    <img src={user.avatarUrl ? `http://localhost:3003${user.avatarUrl}` : PhotoUser} className='header-sidebar__img' />
+                    <div className="header-sidebar__username" onClick={() => setActive(true)} >{user.fullName[0].toUpperCase() + user.fullName.slice(1)}</div>
+                    <span className='header-sidebar__logout _icon-logout' onClick={_logout} ></span>
+                    {active && <Profile user={user} setActive={setActive} />}
                 </>
             }
         </div>

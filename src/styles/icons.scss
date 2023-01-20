@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'icons';
-    src: url('../icons/icons.eot?359726');
-    src: url('../icons/icons.eot?359726#iefix') format('embedded-opentype'),
-        url('../icons/icons.ttf?359726') format('truetype'),
-        url('../icons/icons.woff?359726') format('woff'),
-        url('../icons/icons.svg?359726#icons') format('svg');
+    src: url('../icons/icons.eot?frvda8');
+    src: url('../icons/icons.eot?frvda8#iefix') format('embedded-opentype'),
+        url('../icons/icons.ttf?frvda8') format('truetype'),
+        url('../icons/icons.woff?frvda8') format('woff'),
+        url('../icons/icons.svg?frvda8#icons') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -12,7 +12,7 @@
 
 [class^="_icon-"],
 [class*=" _icon-"] {
-    /* use !important to prevent issues with browser extensions that change icons */
+    /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icons' !important;
     speak: never;
     font-style: normal;
@@ -26,9 +26,17 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+._icon-friends:before {
+    content: "\e912";
+}
+
+._icon-message:before {
+    content: "\e913";
+}
+
 ._icon-close:before {
     content: "\e911";
-
+    color: #fff;
 }
 
 ._icon-arrow-back:before {

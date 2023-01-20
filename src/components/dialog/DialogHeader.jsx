@@ -13,7 +13,8 @@ const DialogHeader = React.memo(() => {
     const [modalActive, setModalActive] = useState(false)
 
     const params = useParams()
-    const users = useSelector((state) => state.sidebar.users.filter((userId) => userId.id == params.dialogId))
+    const users = useSelector((state) => state.sidebar.users.filter((userId) => userId._id == params.dialogId))
+
 
 
     const openProfileInfo = () => {
@@ -25,9 +26,9 @@ const DialogHeader = React.memo(() => {
         <div className='dialog__header header-dialog' >
             <div className='header-dialog__left'>
                 <NavLink to='/' className="header-dialog__arrow _icon-arrow-back"></NavLink>
-                <h4 className="header-dialog__name">{users[0].name}</h4>
+                <h4 className="header-dialog__name">{users[0].fullName[0].toUpperCase() + users[0].fullName.slice(1)}</h4>
             </div>
-            <DialogHeaderIcons dropdawnActive={dropdawnActive} setDropdawnActive={setDropdawnActive} />
+            <DialogHeaderIcons params={params} dropdawnActive={dropdawnActive} setDropdawnActive={setDropdawnActive} />
             {dropdawnActive && <Dropdawn openProfileInfo={openProfileInfo} />}
             {modalActive && <Modal active={modalActive} setActive={setModalActive}  >
                 <ModalProfile setModalActive={setModalActive} />

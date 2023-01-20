@@ -73,6 +73,7 @@
         cursor: pointer;
         transition: 0.3s all ease 0s;
 
+
         &:not(:last-child) {
             margin-right: 15px;
         }
@@ -80,6 +81,12 @@
         &:hover {
             color: rgb(214, 147, 147);
         }
+
+        &.disabled {
+            pointer-events: none;
+            color: red
+        }
+
     }
 
 

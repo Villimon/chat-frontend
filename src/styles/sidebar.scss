@@ -43,6 +43,37 @@
         color: #fff;
     }
 
+
+    &__tags {
+        display: flex;
+        justify-content: space-between;
+        height: 40px;
+        // background-color: red;
+        border-bottom: 1px solid #ccc;
+    }
+
+    &__icons {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        transition: 0.3s all ease 0s;
+        cursor: pointer;
+
+        &:nth-child(1) {
+            border-right: 1px solid #ccc;
+        }
+
+        &:hover {
+            color: rgb(214, 147, 147);
+        }
+
+        &.active {
+            color: rgb(214, 147, 147);
+        }
+    }
+
     &__dialogs {}
 
 
