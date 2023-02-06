@@ -98,6 +98,15 @@
     margin-bottom: 0px;
     padding: 10px 15px;
 
+    &.partner {
+        flex-direction: row-reverse;
+    }
+
+    &.partner .chat-dialog__user {
+        margin-right: 0;
+        margin-left: 15px;
+    }
+
     &__user {
         margin-right: 15px;
     }
@@ -125,6 +134,16 @@
 
     }
 
+    &__delete {
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+        border-radius: 5px;
+        background-color: rgb(138, 46, 46);
+        color: #fff;
+    }
 
 }
 
@@ -138,6 +157,9 @@
         font-size: 30px;
         transition: 0.3s all ease 0s;
         cursor: pointer;
+        position: relative;
+        top: 0;
+        left: 0;
 
         &:not(:last-child) {
             margin-right: 10px;
@@ -155,7 +177,21 @@
         font-size: 26px;
     }
 
+    &__emoji {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+    }
+
     input[type="text"]::-webkit-input-placeholder {
         color: #fff;
     }
+}
+
+
+.EmojiPickerReact.epr-main {
+    position: absolute !important;
+    bottom: 45px;
+    right: 0px;
 }

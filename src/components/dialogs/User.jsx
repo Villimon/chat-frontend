@@ -7,7 +7,6 @@ import PhotoUser from '../../assets/images/photoUser.jpg'
 const User = (props) => {
     const path = '/dialogs/' + props.id
 
-
     return (
         <NavLink to={path} className="dialogs-sidebar__item item-dialogs-sidebar ">
             <img className="item-dialogs-sidebar__img" src={props.image ? `http://localhost:3003${props.image}` : PhotoUser} />

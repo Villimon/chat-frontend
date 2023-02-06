@@ -2,15 +2,22 @@ import { usersAPI } from "../api/api";
 
 const GET_USERS = 'GET_USERS'
 const GET_USERS_FROM_SEARCH = 'GET_USERS_FROM_SEARCH'
+const DELETE_USERS = 'DELETE_USERS'
 
 
 let initialState = {
     users: [],
 }
-
+//!!!Убрать получение всех юзеров
 const sidebarReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USERS: {
+            return {
+                ...state,
+                users: action.payload,
+            }
+        }
+        case DELETE_USERS: {
             return {
                 ...state,
                 users: action.payload,
@@ -39,6 +46,12 @@ export const getUsersAction = (data) => {
     return {
         type: GET_USERS,
         payload: data
+    }
+}
+export const deleteUsersAction = () => {
+    return {
+        type: GET_USERS,
+        payload: []
     }
 }
 

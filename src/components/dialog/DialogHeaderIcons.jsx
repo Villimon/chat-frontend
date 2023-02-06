@@ -6,7 +6,8 @@ const DialogHeaderIcons = React.memo(({ setDropdawnActive, dropdawnActive, param
     const [isLoading, setIsLoading] = useState(false)
 
     const dispatch = useDispatch()
-    const myFriends = useSelector((state) => state.auth.data.friends)
+    const myFriends = useSelector((state) => state.auth.data.friends.filter(f => f._id === params.dialogId))
+
 
     const followUnfollowFlow = (callback) => {
         setIsLoading(true)
@@ -18,7 +19,7 @@ const DialogHeaderIcons = React.memo(({ setDropdawnActive, dropdawnActive, param
 
     return (
         <div className='header-dialog__icons'>
-            {myFriends.includes(params.dialogId)
+            {myFriends.length
                 ? <span className={isLoading
                     ?
                     "header-dialog__icon disabled _icon-person-delete"

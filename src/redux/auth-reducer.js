@@ -59,7 +59,7 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 data: {
                     ...state.data, friends: state.data.friends.filter(friend => {
-                        return friend !== action.payload
+                        return friend._id !== action.payload
                     })
                 },
 
@@ -113,10 +113,10 @@ export const setAuthUserData = (data) => {
 }
 
 
-export const followAction = (id) => {
+export const followAction = (data) => {
     return {
         type: FOLLOW,
-        payload: id
+        payload: data
     }
 }
 export const unfollowAction = (id) => {
@@ -217,7 +217,7 @@ export const follow = (id) => {
         try {
             let data = await followAPI.follow(id)
             if (data) {
-                dispatch(followAction(id))
+                dispatch(followAction(data.friends.find(friend => friend._id === id)))
             }
         } catch (error) {
             console.log(error);

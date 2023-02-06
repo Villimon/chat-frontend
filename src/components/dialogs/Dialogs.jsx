@@ -1,32 +1,48 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { dialogsAPI } from '../../api/api';
+import { getDialogs } from '../../redux/dialogs-reducer';
 import { getUsers } from '../../redux/sidebar-reducer';
 import SkeletonDialogs from '../skeletons/SkeletonDialogs';
 import User from './User';
-
+import socket from '../../api/socket';
 
 
 
 const Dialogs = React.memo(({ searchValue, isLoading, tagCount }) => {
 
+
     const dispatch = useDispatch()
     const users = useSelector((state) => state.sidebar.users)
     const friends = useSelector((state) => state.auth.data.friends)
-    let arr = []
+    const myId = useSelector((state) => state.auth.data._id)
+    const dialogs = useSelector((state) => state.dialogs.dialogs)
 
 
-    for (let index = 0; index < friends.length; index++) {
-        let asd = users.filter(user => user._id === friends[index]);
-        arr.push(...asd)
+
+
+    const onNewDialog = () => {
+        dispatch(getDialogs())
     }
 
-    console.log(users);
+    useEffect(() => {
+        dispatch(getDialogs())
+
+        socket.on('DIALOG_CREATED', onNewDialog)
+        socket.on('NEW:MESSAGE', onNewDialog)
+        return () => {
+            socket.removeListener('DIALOG_CREATED', onNewDialog)
+            socket.removeListener('NEW:MESSAGE', onNewDialog)
+        }
+    }, [])
+
+
 
 
     return (
         <div className='sidebar__dialogs dialogs-sidebar'>
             {
-                users
+                !users.length
                     ? <div className="dialogs-sidebar__body">
                         {isLoading
                             ? <>
@@ -38,23 +54,23 @@ const Dialogs = React.memo(({ searchValue, isLoading, tagCount }) => {
                             </>
                             : <>    {tagCount === 0
                                 &&
-                                <>  {users.length ? users
+                                <>  {dialogs ? dialogs
                                     .filter((user) => {
-                                        return user.fullName.toLowerCase().includes(searchValue.toLowerCase())
+                                        return user.partner.fullName.toLowerCase().includes(searchValue.toLowerCase())
                                     })
                                     .map((user) => <User
                                         key={user._id}
-                                        id={user._id}
-                                        image={user.avatarUrl}
-                                        name={user.fullName}
-                                        message={user.message}
+                                        id={myId === user.author._id ? user.partner._id : user.author._id}
+                                        image={myId === user.author._id ? user.partner.avatarUrl : user.author.avatarUrl}
+                                        name={myId === user.author._id ? user.partner.fullName : user.author.fullName}
+                                        message={user.lastMessage.text}
                                     />)
                                     : <h2 style={{ textAlign: 'center', marginTop: 10 }}>Список диалогов пуст</h2>
                                 }
                                 </>
 
                             }
-                                <>  {tagCount === 1 && <>  {arr.length ? arr
+                                <>  {tagCount === 1 && <>  {friends.length ? friends
                                     .filter((user) => {
                                         return user.fullName.toLowerCase().includes(searchValue.toLowerCase())
                                     })
@@ -73,7 +89,14 @@ const Dialogs = React.memo(({ searchValue, isLoading, tagCount }) => {
                         }
 
                     </div>
-                    : <h2 style={{ textAlign: 'center', marginTop: 10 }}>Список диалогов пуст</h2>
+                    : users ? users
+                        .map((user) => <User
+                            key={user._id}
+                            id={user._id}
+                            image={user.avatarUrl}
+                            name={user.fullName}
+                        />)
+                        : <h2 style={{ textAlign: 'center', marginTop: 10 }}>Ничего не найдено</h2>
             }
 
         </div>

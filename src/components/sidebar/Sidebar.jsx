@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { getUsers, getUsersFromSearch } from '../../redux/sidebar-reducer';
+import { getDialogs } from '../../redux/dialogs-reducer';
+import { deleteUsersAction, getUsers, getUsersFromSearch } from '../../redux/sidebar-reducer';
 import Dialogs from '../dialogs/Dialogs';
 import SidebarHeader from './SidebarHeader';
 
@@ -44,35 +45,27 @@ const Sidebar = React.memo(({ setIsAuth }) => {
     }, [count]);
 
 
-    // const asd = async () => {
-    //     try {
-    //         setIsLoading(true)
-    //         await dispatch(getUsers())
-    //     } catch (error) {
-    //         console.log(error);
-    //     } finally {
-    //         setIsLoading(false)
-    //     }
-    // }
 
-    useEffect(() => {
-        // asd()
-        setIsLoading(true)
-        dispatch(getUsers())
-            .then(() => setIsLoading(false))
-    }, [])
+
+    // useEffect(() => {
+    // setIsLoading(true)
+    // dispatch(getUsers())
+    // .then(() => setIsLoading(false))
+    // }, [])
 
 
     const toBack = (num) => {
         const query = new URLSearchParams(location.search);
         const querySection = query.get("term");
         setTagCount(num)
-        if (querySection) {
-            navigate({ pathname: '/' });
-            setIsLoading(true)
-            dispatch(getUsers())
-                .then(() => setIsLoading(false))
-        }
+        //Вернуть эту провреку, а то при переключение между вклаждками друзья - диалоги, обновляется тсраница
+        // if (querySection) {
+        navigate({ pathname: '/' });
+        setIsLoading(true)
+        dispatch(deleteUsersAction())
+        dispatch(getDialogs())
+            .then(() => setIsLoading(false))
+        // }
     }
 
     return (

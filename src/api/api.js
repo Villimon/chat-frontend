@@ -81,5 +81,38 @@ export const followAPI = {
     },
 }
 
+export const dialogsAPI = {
+    getDialogs() {
+        return instance.get(`/dialogs`)
+            .then(res => {
+                return res.data
+            })
+    },
+    createDialog(author, partner, text) {
+        return instance.post(`/dialogs`, { author, partner, text })
+            .then(res => {
+                return res.data
+            })
+    }
+}
 
-
+export const messagesAPI = {
+    getMessages(dialogId) {
+        return instance.get(`/messages?dialog=${dialogId}`)
+            .then(res => {
+                return res.data
+            })
+    },
+    sendMessage(text, dialogId) {
+        return instance.post(`/messages`, { text, dialogId })
+            .then(res => {
+                return res.data
+            })
+    },
+    deleteMessage(messageId) {
+        return instance.delete(`/messages/${messageId}`)
+            .then(res => {
+                return res.data
+            })
+    }
+}
